@@ -160,6 +160,12 @@ post '/admin' do
 
 end
 
+get '/showusers' do
+
+	erb :showusers
+
+end
+
 def get_db
 	return SQLite3::Database.new 'db.sqlite'
 end
