@@ -16,6 +16,7 @@ configure do
 			"datetime" TEXT, 
 			"master" TEXT)'
  end
+
 get '/' do
 	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"			
 end
@@ -46,6 +47,9 @@ post '/visit' do
 
 	end
 
+	db = get_db
+
+	db.execute 'insert into Users (username, phone, datetime, master) values (?, ?, ?, ?)', [@username, @phone, @datetime, @master]
 
 	f = File.open "public/user.txt", "a"
 	f.write "#{@username}, телефон: #{@phone}, дата и время: #{@datetime}, мастер #{@master}\n"
@@ -156,3 +160,6 @@ post '/admin' do
 
 end
 
+def get_db
+	return SQLite3::Database.new 'db.sqlite'
+end
