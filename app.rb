@@ -168,7 +168,7 @@ get '/showusers' do
 
   db = get_db
   # Выполняем запрос и получаем результаты
-  @users = db.execute "SELECT * FROM Users"
+  @users = db.execute "SELECT * FROM Users ORDER BY id DESC"
   db.close
 
 	erb :showusers
