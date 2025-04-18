@@ -21,9 +21,12 @@
     <div class="form-group">
       <label>Ваш мастер:</label>
       <select class="form-select" name="master" required>
-          <option value="" selected disabled>Выбрать мастера</option>
-          <% @masters.each do |master| %>
-            <option value="<%= master[0] %>"><%= master[0] %></option>
+          <% if @masters %>
+            <% @masters.each do |master| %>
+              <option value="<%= master[0] %>"><%= master[0] %></option>
+            <% end %>
+          <% else %>
+            <option disabled>Нет доступных мастеров</option>
           <% end %>
       </select>
     </div>
