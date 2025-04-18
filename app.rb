@@ -44,10 +44,14 @@ end
 
 post '/visit' do
 
-	@username = params[:username].capitalize
-	@phone = params[:phone]
-	@datetime = params[:datetime]
-	@master = params[:master]
+	db = get_db
+  @masters = db.execute "SELECT master FROM Master ORDER BY master" # Получаем список мастеров
+  db.close
+
+	@username = params[:username].capitalize || ''
+	@phone = params[:phone] || ''
+	@datetime = params[:datetime] || ''
+	@master = params[:master] || ''
 
 	input_user = {:username => "Введите имя", :phone => "Введите телефон", :datetime => "Введите дату и время", :master => "Выбирите мастера"}
 
@@ -56,6 +60,8 @@ post '/visit' do
 		if params[key].to_s.strip.empty?
 			@error = input_user[key]
 			return erb :visit
+		else
+
 		end
 
 	end
