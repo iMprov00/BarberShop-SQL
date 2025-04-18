@@ -6,7 +6,7 @@ require 'sqlite3'
 
 configure do
 
-	db = SQLite3::Database.new 'db.sqlite'
+	db = SQLite3::Database.new 'barber.db'
 
 	db.execute 'CREATE TABLE IF NOT EXISTS 
 		"Users" 
@@ -167,5 +167,5 @@ get '/showusers' do
 end
 
 def get_db
-	return SQLite3::Database.new 'db.sqlite'
+	return SQLite3::Database.new 'barber.db'
 end
