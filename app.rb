@@ -15,6 +15,11 @@ configure do
 			"phone" TEXT, 
 			"datetime" TEXT, 
 			"master" TEXT)'
+
+	db.execute 'CREATE TABLE IF NOT EXISTS 
+		"Master" 
+			("id" INTEGER PRIMARY KEY AUTOINCREMENT, 
+			"master" TEXT)'
  end
 
 
