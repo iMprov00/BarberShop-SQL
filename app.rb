@@ -20,6 +20,7 @@ configure do
 		"Master" 
 			("id" INTEGER PRIMARY KEY AUTOINCREMENT, 
 			"master" TEXT)'
+
  end
 
 
@@ -33,6 +34,10 @@ get '/about' do
 end
 
 get '/visit' do
+  db = get_db
+  @masters = db.execute "SELECT name FROM Master ORDER BY name" # Получаем список мастеров
+  db.close
+	
 	erb :visit
 end
 
