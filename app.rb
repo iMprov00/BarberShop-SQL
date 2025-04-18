@@ -17,6 +17,8 @@ configure do
 			"master" TEXT)'
  end
 
+
+
 get '/' do
 	erb "Hello! <a href=\"https://github.com/bootstrap-ruby/sinatra-bootstrap\">Original</a> pattern has been modified for <a href=\"http://rubyschool.us/\">Ruby School</a>"			
 end
@@ -56,6 +58,8 @@ post '/visit' do
 	f.close
 
 	@message = "#{@username}, вы успешно записаны на #{@datetime} к мастеру #{@master}!"
+
+	db.close
 
 	erb :visit
 
@@ -152,7 +156,7 @@ post '/admin' do
 
 	if @login == "1" && @password == "11"
 
-		redirect 'user.txt'
+		 redirect '/showusers' 
 	else
 		@error = "Неверный логин или пароль!"
 		erb :admin
@@ -161,6 +165,11 @@ post '/admin' do
 end
 
 get '/showusers' do
+
+  db = get_db
+  # Выполняем запрос и получаем результаты
+  @users = db.execute "SELECT * FROM Users"
+  db.close
 
 	erb :showusers
 
