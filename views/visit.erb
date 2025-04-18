@@ -20,11 +20,12 @@
 
     <div class="form-group">
       <label>Ваш мастер:</label>
-      <select class="form-select" name="master">
+      <select class="form-select" name="master" required>
         <option selected disabled>Выбрать мастера</option>
-        <option value="Виталий">Виталий</option>
-        <option value="Евгений">Евгений</option>
-        <option value="Максим">Максим</option>
+          <option value="" selected disabled>Выбрать мастера</option>
+          <% @masters.each do |master| %>
+            <option value="<%= master[0] %>"><%= master[0] %></option>
+          <% end %>
       </select>
     </div>
 
