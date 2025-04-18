@@ -60,15 +60,17 @@ post '/visit' do
 
 	end
 
+	@datetime_formatted = Date.parse(@datetime).strftime("%d.%m.%Y")
+
 	db = get_db
 
-	db.execute 'insert into Users (username, phone, datetime, master) values (?, ?, ?, ?)', [@username, @phone, @datetime, @master]
+	db.execute 'insert into Users (username, phone, datetime, master) values (?, ?, ?, ?)', [@username, @phone, @datetime_formatted, @master]
 
 	f = File.open "public/user.txt", "a"
-	f.write "#{@username}, телефон: #{@phone}, дата и время: #{@datetime}, мастер #{@master}\n"
+	f.write "#{@username}, телефон: #{@phone}, дата и время: #{@datetime_formatted}, мастер #{@master}\n"
 	f.close
 
-	@message = "#{@username}, вы успешно записаны на #{@datetime} к мастеру #{@master}!"
+	@message = "#{@username}, вы успешно записаны на #{@datetime_formatted} к мастеру #{@master}!"
 
 	db.close
 
