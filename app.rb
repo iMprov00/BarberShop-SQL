@@ -34,8 +34,9 @@ get '/about' do
 end
 
 get '/visit' do
-  db = get_db
-  @masters = db.execute "SELECT name FROM Master ORDER BY master" # Получаем список мастеров
+
+	db = get_db
+  @masters = db.execute "SELECT master FROM Master ORDER BY master" # Получаем список мастеров
   db.close
 
 	erb :visit
